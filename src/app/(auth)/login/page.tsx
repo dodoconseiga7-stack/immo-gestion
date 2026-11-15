@@ -30,7 +30,7 @@ export default function LoginPage() {
           <div className="w-20 h-20 mx-auto rounded-2xl overflow-hidden shadow-xl border-2 border-[#071B3A]/10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logo-officiel.jpg"
+              src="/logo-officiel.png"
               alt="Logo IMMO GESTION"
               className="w-full h-full object-cover"
             />

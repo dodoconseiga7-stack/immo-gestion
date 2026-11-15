@@ -88,7 +88,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src="/logo-officiel.jpg"
+                  src="/logo-officiel.png"
                   alt="Logo Officiel IMMO GESTION"
                   className="w-full h-full object-cover"
                 />

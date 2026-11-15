@@ -84,12 +84,13 @@ export default function TelechargerAppPage() {
     <div className="animate-fade-in space-y-6 max-w-4xl mx-auto">
       {/* En-tête officiel */}
       <div className="text-center py-6 px-4 bg-[#071B3A] text-white rounded-2xl shadow-md border border-gray-800">
-        <div className="relative w-44 h-12 mx-auto mb-3">
+        <div className="w-16 h-16 mx-auto mb-3 rounded-2xl overflow-hidden shadow-lg border border-white/20">
           {customLogo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={customLogo} alt="Logo IMMO GESTION" className="w-full h-full object-contain" />
+            <img src={customLogo} alt="Logo IMMO GESTION" className="w-full h-full object-cover" />
           ) : (
-            <Image src="/logo.svg" alt="Logo IMMO GESTION" fill priority className="object-contain" />
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src="/logo-officiel.png" alt="Logo Officiel IMMO GESTION" className="w-full h-full object-cover" />
           )}
         </div>
         <h1 className="text-2xl sm:text-3xl font-black tracking-wide">

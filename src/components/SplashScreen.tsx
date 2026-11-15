@@ -5,23 +5,31 @@ import { useEffect, useState } from 'react';
 export default function SplashScreen() {
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
-  const [logoScale, setLogoScale] = useState(0.85);
+  const [logoScale, setLogoScale] = useState(0.9);
   const [logoOpacity, setLogoOpacity] = useState(0);
-  const [barWidth, setBarWidth] = useState(0);
 
   useEffect(() => {
-    // Animation d'entrée du logo
-    const t1 = setTimeout(() => {
+    // Animation d'apparition fluide et élégante (comme WhatsApp / ChatGPT)
+    const tEnter = setTimeout(() => {
       setLogoScale(1);
       setLogoOpacity(1);
-    }, 100);
-    // Barre de chargement
-    const t2 = setTimeout(() => setBarWidth(100), 300);
-    // Fondu de sortie
-    const t3 = setTimeout(() => setFadeOut(true), 2200);
-    const t4 = setTimeout(() => setVisible(false), 2700);
+    }, 50);
 
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+    // Début du fondu de sortie
+    const tFade = setTimeout(() => {
+      setFadeOut(true);
+    }, 1600);
+
+    // Retrait complet de l'écran
+    const tRemove = setTimeout(() => {
+      setVisible(false);
+    }, 2050);
+
+    return () => {
+      clearTimeout(tEnter);
+      clearTimeout(tFade);
+      clearTimeout(tRemove);
+    };
   }, []);
 
   if (!visible) return null;
@@ -31,98 +39,51 @@ export default function SplashScreen() {
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 9999,
+        zIndex: 99999,
         display: 'flex',
-        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#071B3A',
         opacity: fadeOut ? 0 : 1,
-        transition: 'opacity 0.5s ease',
+        transition: 'opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+        pointerEvents: fadeOut ? 'none' : 'auto',
       }}
     >
-      {/* Logo + Texte */}
+      {/* Conteneur Logo Officiel Grand et Centré */}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '24px',
+          justifyContent: 'center',
           transform: `scale(${logoScale})`,
           opacity: logoOpacity,
-          transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease',
+          transition: 'transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease',
         }}
       >
-        {/* Logo officiel */}
-        <div style={{
-          width: '160px',
-          height: '160px',
-          borderRadius: '32px',
-          overflow: 'hidden',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.5)',
-        }}>
+        <div
+          style={{
+            width: 'clamp(180px, 48vw, 260px)',
+            height: 'clamp(180px, 48vw, 260px)',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo-officiel.jpg"
-            alt="IMMO GESTION"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            src="/logo-officiel.png"
+            alt="Logo Officiel IMMO GESTION"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55))',
+            }}
           />
         </div>
-
-        {/* Nom */}
-        <div style={{ textAlign: 'center' }}>
-          <h1 style={{
-            fontSize: '28px',
-            fontWeight: 900,
-            color: '#FFFFFF',
-            letterSpacing: '0.15em',
-            margin: 0,
-            fontFamily: 'Inter, sans-serif',
-          }}>
-            IMMO <span style={{ color: '#35C928' }}>GESTION</span>
-          </h1>
-          <p style={{
-            fontSize: '11px',
-            color: '#64748B',
-            textTransform: 'uppercase',
-            letterSpacing: '0.2em',
-            marginTop: '6px',
-            fontFamily: 'Inter, sans-serif',
-          }}>
-            Gestion Immobilière Professionnelle
-          </p>
-        </div>
-
-        {/* Barre de progression */}
-        <div style={{
-          width: '180px',
-          height: '3px',
-          backgroundColor: 'rgba(255,255,255,0.1)',
-          borderRadius: '99px',
-          overflow: 'hidden',
-        }}>
-          <div style={{
-            height: '100%',
-            width: `${barWidth}%`,
-            backgroundColor: '#35C928',
-            borderRadius: '99px',
-            transition: 'width 1.9s ease',
-          }} />
-        </div>
       </div>
-
-      {/* Mention Burkina Faso */}
-      <p style={{
-        position: 'absolute',
-        bottom: '32px',
-        fontSize: '10px',
-        color: '#475569',
-        textTransform: 'uppercase',
-        letterSpacing: '0.2em',
-        fontFamily: 'Inter, sans-serif',
-      }}>
-        Burkina Faso · Ouagadougou
-      </p>
     </div>
   );
 }

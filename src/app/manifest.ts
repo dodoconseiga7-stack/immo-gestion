@@ -3,27 +3,39 @@ import type { MetadataRoute } from 'next';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'IMMO GESTION - Gestion Immobilière Professionnelle',
-    short_name: 'IMMO',
+    short_name: 'IMMO GESTION',
     description: 'Application officielle de gestion immobilière et locative pour le Burkina Faso',
     start_url: '/dashboard',
+    scope: '/',
     display: 'standalone',
     background_color: '#071B3A',
     theme_color: '#071B3A',
     orientation: 'portrait-primary',
     icons: [
       {
-        src: '/logo.svg',
-        sizes: '192x192 512x512',
-        type: 'image/svg+xml',
+        src: '/icons/icon-192.png',
+        sizes: '192x192',
+        type: 'image/png',
         purpose: 'any',
       },
       {
-        src: '/logo.svg',
+        src: '/icons/icon-512.png',
         sizes: '512x512',
-        type: 'image/svg+xml',
+        type: 'image/png',
+        purpose: 'any',
+      },
+      {
+        src: '/icons/icon-maskable-192.png',
+        sizes: '192x192',
+        type: 'image/png',
+        purpose: 'maskable',
+      },
+      {
+        src: '/icons/icon-maskable-512.png',
+        sizes: '512x512',
+        type: 'image/png',
         purpose: 'maskable',
       },
     ],
   };
 }
-

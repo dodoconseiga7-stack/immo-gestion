@@ -10,29 +10,28 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/logo-officiel.jpg",
+      "src": "/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/logo-officiel.jpg",
+      "src": "/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/logo-officiel.jpg",
-      "sizes": "180x180",
-      "type": "image/jpeg",
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "maskable"
-    }
-  ],
-  "screenshots": [
+    },
     {
-      "src": "/logo-officiel.jpg",
-      "sizes": "1024x1024",
-      "type": "image/jpeg"
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

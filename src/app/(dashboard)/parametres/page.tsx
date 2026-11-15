@@ -114,11 +114,11 @@ export default function ParametresPage() {
                   className="w-full h-full object-contain object-left"
                 />
               ) : (
-                <Image
-                  src="/logo.svg"
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src="/logo-officiel.png"
                   alt="Logo officiel"
-                  fill
-                  className="object-contain object-left"
+                  className="w-12 h-12 object-cover rounded-xl"
                 />
               )}
             </div>
@@ -140,11 +140,11 @@ export default function ParametresPage() {
                   className="w-full h-full object-contain"
                 />
               ) : (
-                <Image
-                  src="/logo.svg"
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src="/logo-officiel.png"
                   alt="Logo officiel"
-                  fill
-                  className="object-contain"
+                  className="w-12 h-12 object-cover rounded-xl mx-auto"
                 />
               )}
             </div>
