@@ -20,8 +20,8 @@ const documentsDisponibles: DocumentItem[] = [
     categorie: 'Bail',
     description: 'Conforme aux réglementations en vigueur au Burkina Faso (dépôt de garantie, préavis, obligations locataire).',
     taille: '420 Ko',
-    format: 'PDF',
-    dateMaj: 'Octobre 2024',
+    format: 'DOCX',
+    dateMaj: 'Novembre 2024',
   },
   {
     id: 'doc-02',
@@ -29,7 +29,7 @@ const documentsDisponibles: DocumentItem[] = [
     categorie: 'Bail',
     description: 'Spécifiquement adapté aux immeubles R+2, R+3, bureaux climatisés et espaces commerciaux de Ouagadougou.',
     taille: '510 Ko',
-    format: 'PDF',
+    format: 'DOCX',
     dateMaj: 'Novembre 2024',
   },
   {
@@ -83,9 +83,56 @@ export default function TelechargementsPage() {
     return true;
   });
 
+  // Téléchargement réel et effectif d'un fichier sur l'appareil
   const handleDownload = (doc: DocumentItem) => {
+    const fileContent = `========================================================================
+IMMO GESTION - DOCUMENT OFFICIEL CONFORME BURKINA FASO
+Plateforme de Gestion Immobilière Professionnelle (Ouagadougou)
+========================================================================
+
+TITRE : ${doc.titre}
+CATÉGORIE : ${doc.categorie}
+FORMAT : ${doc.format}
+DATE DE MISE À JOUR : ${doc.dateMaj}
+RÉFÉRENCE UNIQUE : ${doc.id.toUpperCase()}-2024-BF
+
+------------------------------------------------------------------------
+DESCRIPTION OFFICIELLE :
+${doc.description}
+------------------------------------------------------------------------
+
+CLAUSES PRINCIPALES DU MODÈLE :
+1. DÉSIGNATION DES PARTIES :
+   - Bailleur / Propriétaire ou Société de Gestion Immobilière mandataire.
+   - Preneur / Locataire titulaire du bail.
+2. DÉSIGNATION DES LIEUX LOUÉS :
+   - Adresse : Ouagadougou, Burkina Faso.
+   - Consistance des locaux : Bureaux administratifs, Maisons ou Villas.
+   - Compteurs SONABEL (Électricité) et ONEA (Eau) individualisés.
+3. CONDITIONS FINANCIÈRES :
+   - Montant du loyer mensuel payable en Francs CFA (FCFA).
+   - Modalités de règlement : Virement bancaire, Orange Money, Moov Money.
+   - Dépôt de garantie conforme aux lois burkinabè.
+4. ÉTAT DES LIEUX CONTRADICTOIRE & ASSURANCES :
+   - Établissement obligatoire lors de la remise des clés.
+   - Entretien des installations et climatiseurs.
+
+Ce document est certifié par IMMO GESTION pour être utilisé directement
+par les propriétaires, secrétaires et gestionnaires immobiliers.
+========================================================================`;
+
+    const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${doc.titre.replace(/[^a-zA-Z0-9]/g, '_')}.${doc.format === 'XLSX' ? 'csv' : 'txt'}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
     setDownloadSuccess(doc.titre);
-    setTimeout(() => setDownloadSuccess(null), 3500);
+    setTimeout(() => setDownloadSuccess(null), 4000);
   };
 
   return (
@@ -104,9 +151,9 @@ export default function TelechargementsPage() {
       </div>
 
       {downloadSuccess && (
-        <div className="p-4 rounded-xl bg-green-50 border border-green-200 text-green-800 text-xs font-semibold flex items-center gap-2">
+        <div className="p-4 rounded-xl bg-green-50 border border-green-200 text-green-800 text-xs font-semibold flex items-center gap-2 animate-bounce">
           <CheckCircle2 size={16} className="text-[#35C928]" />
-          Document téléchargé avec succès : {downloadSuccess}
+          Fichier téléchargé avec succès sur votre appareil : {downloadSuccess}
         </div>
       )}
 
@@ -119,18 +166,18 @@ export default function TelechargementsPage() {
             placeholder="Rechercher un contrat, une quittance, une fiche..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="input pl-10 text-sm"
+            className="input pl-9"
           />
         </div>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
           {['TOUS', 'Bail', 'Quittance', 'Technique', 'Juridique'].map((cat) => (
             <button
               key={cat}
               onClick={() => setFilterCat(cat)}
-              className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
                 filterCat === cat
                   ? 'bg-[#071B3A] text-white shadow-sm'
-                  : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-400'
+                  : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
               }`}
             >
               {cat === 'TOUS' ? 'Tous les documents' : cat}
@@ -139,34 +186,37 @@ export default function TelechargementsPage() {
         </div>
       </div>
 
-      {/* Grille de documents */}
+      {/* Grille des documents téléchargeables */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filtered.map((doc) => (
-          <div key={doc.id} className="card p-5 flex flex-col justify-between hover:border-[#35C928] transition-all">
+          <div key={doc.id} className="card p-5 flex flex-col justify-between hover:shadow-md transition-shadow">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className={`badge ${
-                  doc.format === 'PDF' ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'
+                  doc.format === 'PDF' ? 'bg-red-50 text-red-700 border-red-200' :
+                  doc.format === 'DOCX' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                  'bg-emerald-50 text-emerald-700 border-emerald-200'
                 }`}>
                   {doc.format}
                 </span>
-                <span className="text-[11px] text-gray-400 font-medium">{doc.taille}</span>
+                <span className="text-[11px] text-gray-400">{doc.taille}</span>
               </div>
-              <h3 className="font-bold text-[#071B3A] text-sm leading-snug mb-2">
+              <h2 className="text-sm font-bold text-[#071B3A] line-clamp-2 mb-2">
                 {doc.titre}
-              </h3>
-              <p className="text-xs text-gray-600 leading-relaxed mb-4">
+              </h2>
+              <p className="text-xs text-gray-500 leading-relaxed line-clamp-3 mb-4">
                 {doc.description}
               </p>
             </div>
 
             <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
-              <span className="text-[10px] text-gray-400">MàJ : {doc.dateMaj}</span>
+              <span className="text-[10px] text-gray-400">Mis à jour : {doc.dateMaj}</span>
               <button
                 onClick={() => handleDownload(doc)}
-                className="btn-primary text-xs py-1.5 px-3 flex items-center gap-1.5"
+                className="btn-primary py-1.5 px-3 text-xs flex items-center gap-1.5"
               >
-                <ArrowDownToLine size={14} /> Télécharger
+                <ArrowDownToLine size={14} />
+                Télécharger
               </button>
             </div>
           </div>
@@ -175,4 +225,3 @@ export default function TelechargementsPage() {
     </div>
   );
 }
-

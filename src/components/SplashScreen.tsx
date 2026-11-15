@@ -8,7 +8,7 @@ export default function SplashScreen() {
   useEffect(() => {
     setMounted(true);
 
-    // Supprimer le splash statique après chargement
+    // Supprimer le splash statique après chargement fluide
     const timerFade = setTimeout(() => {
       const splash = document.getElementById('initial-splash');
       if (splash) {
@@ -16,9 +16,9 @@ export default function SplashScreen() {
         splash.style.pointerEvents = 'none';
         setTimeout(() => {
           splash.remove();
-        }, 500);
+        }, 400);
       }
-    }, 1600);
+    }, 900);
 
     return () => clearTimeout(timerFade);
   }, []);

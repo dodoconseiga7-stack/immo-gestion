@@ -27,6 +27,7 @@ export default function MobileBottomBar() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={true}
               className="flex flex-col items-center justify-center -mt-5"
               aria-label="Assistant IA vocal"
             >
@@ -41,6 +42,7 @@ export default function MobileBottomBar() {
           <Link
             key={item.href}
             href={item.href}
+            prefetch={true}
             className="flex flex-col items-center gap-1 py-1 px-2.5 transition-colors"
           >
             <Icon
