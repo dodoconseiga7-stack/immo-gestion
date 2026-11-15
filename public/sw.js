@@ -1,5 +1,5 @@
-// Service Worker IMMO GESTION - Version 2 (Nouveau Logo & Icônes Adaptatives)
-const CACHE_NAME = 'immo-gestion-v2';
+// Service Worker IMMO GESTION - Version 3 (Plein Bord Plein Ecran Sans Cercle Blanc)
+const CACHE_NAME = 'immo-gestion-v3';
 const STATIC_ASSETS = [
   '/',
   '/login',
@@ -16,6 +16,7 @@ const STATIC_ASSETS = [
   '/recus',
   '/telecharger-app',
   '/logo-officiel.png',
+  '/logo-fullbleed.png',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/icons/icon-maskable-192.png',
@@ -23,8 +24,8 @@ const STATIC_ASSETS = [
   '/apple-touch-icon.png',
   '/favicon-32x32.png',
   '/favicon.ico',
-  '/manifest.webmanifest',
-  '/manifest.json'
+  '/manifest.json',
+  '/manifest.webmanifest'
 ];
 
 self.addEventListener('install', (event) => {
@@ -37,7 +38,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  // Supprime l'ancien cache v1 pour forcer le nouveau logo officiel partout
+  // Purge immédiate de tous les anciens caches
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
@@ -53,7 +54,6 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Stratégie Network-first avec fallback cache pour les données fraîches
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request).catch(() => {

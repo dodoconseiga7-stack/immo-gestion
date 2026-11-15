@@ -20,7 +20,7 @@
 html, body {
   max-width: 100vw;
   overflow-x: hidden !important;
-  background-color: var(--bg-main);
+  background-color: #071B3A !important;
   color: var(--text-main);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
