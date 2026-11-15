@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Building2, Lock, Mail, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Lock, Mail, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -24,10 +24,16 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[#071B3A] flex flex-col justify-center items-center p-4">
       <div className="w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl space-y-6">
-        {/* En-tête officiel */}
-        <div className="text-center space-y-2">
-          <div className="w-16 h-16 bg-[#071B3A] rounded-2xl mx-auto flex items-center justify-center text-[#35C928] shadow-lg">
-            <Building2 size={36} />
+        {/* En-tête officiel avec logo */}
+        <div className="text-center space-y-3">
+          {/* Logo officiel IMMO GESTION */}
+          <div className="w-20 h-20 mx-auto rounded-2xl overflow-hidden shadow-xl border-2 border-[#071B3A]/10">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo-officiel.jpg"
+              alt="Logo IMMO GESTION"
+              className="w-full h-full object-cover"
+            />
           </div>
           <h1 className="text-2xl font-black text-[#071B3A] tracking-wider">
             IMMO <span className="text-[#35C928]">GESTION</span>

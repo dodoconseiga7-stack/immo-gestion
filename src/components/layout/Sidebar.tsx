@@ -74,26 +74,31 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           ${isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}
         `}
       >
-        {/* En-tête avec Logo Officiel IMMO GESTION (ou logo personnalisé) */}
+        {/* En-tête avec Logo Officiel IMMO GESTION */}
         <div className="p-4 border-b border-gray-100 bg-[#071B3A] text-white flex items-center justify-between">
           <Link href="/dashboard" onClick={onClose} className="flex items-center gap-2.5">
-            <div className="relative w-[185px] h-[42px]">
+            <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 shadow-lg">
               {customLogo ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={customLogo}
                   alt="Logo Personnalisé IMMO GESTION"
-                  className="w-full h-full object-contain object-left"
+                  className="w-full h-full object-cover"
                 />
               ) : (
-                <Image
-                  src="/logo.svg"
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src="/logo-officiel.jpg"
                   alt="Logo Officiel IMMO GESTION"
-                  fill
-                  priority
-                  className="object-contain object-left"
+                  className="w-full h-full object-cover"
                 />
               )}
+            </div>
+            <div>
+              <span className="text-sm font-black tracking-wider text-white">
+                IMMO <span className="text-[#35C928]">GESTION</span>
+              </span>
+              <p className="text-[9px] text-gray-400 uppercase tracking-widest">{spaceLabel}</p>
             </div>
           </Link>
           <button

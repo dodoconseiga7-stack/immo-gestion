@@ -1,6 +1,6 @@
 {
   "name": "IMMO GESTION - Gestion Immobilière Professionnelle",
-  "short_name": "IMMO",
+  "short_name": "IMMO GESTION",
   "description": "Application officielle de gestion immobilière et locative pour le Burkina Faso",
   "start_url": "/dashboard",
   "scope": "/",
@@ -10,11 +10,22 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/logo.svg",
-      "sizes": "192x192 512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/logo-officiel.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-officiel.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-officiel.jpg",
+      "sizes": "180x180",
+      "type": "image/jpeg",
+      "purpose": "maskable"
     }
   ]
 }
-
