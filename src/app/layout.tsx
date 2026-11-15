@@ -5,7 +5,7 @@ import SplashScreen from '@/components/SplashScreen';
 export const metadata: Metadata = {
   title: 'IMMO GESTION - Gestion Immobilière Professionnelle',
   description: 'Application officielle de gestion immobilière et locative pour le Burkina Faso.',
-  manifest: '/manifest.json',
+  manifest: '/manifest.json?v=4',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -45,13 +45,13 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
-        {/* Favicon & Icônes Officielles Plein Bord (Sans cercle blanc) */}
+        {/* Favicon & Icônes Officielles Plein Bord (Sans cercle blanc ni cercle noir) */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/manifest.json?v=4" />
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -85,12 +85,15 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased" style={{ backgroundColor: '#071B3A' }}>
-        {/* Splash screen natif immédiat : AUCUN ÉCRAN BLANC au clic */}
+        {/* Splash screen avec Logo Original Grand et Centré (Sans cercle noir, sans texte ajouté) */}
         <div id="initial-splash">
           <div
             style={{
-              width: 'min(65vw, 240px)',
-              height: 'min(65vw, 240px)',
+              width: 'clamp(200px, 52vw, 270px)',
+              height: 'clamp(200px, 52vw, 270px)',
+              borderRadius: '22%',
+              overflow: 'hidden',
+              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.65)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -98,13 +101,12 @@ export default function RootLayout({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/icons/icon-512.png"
+              src="/logo-officiel.png"
               alt="IMMO GESTION"
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 20px 45px rgba(0,0,0,0.65))',
+                objectFit: 'cover',
               }}
             />
           </div>

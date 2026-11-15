@@ -1,5 +1,5 @@
-// Service Worker IMMO GESTION - Version 3 (Plein Bord Plein Ecran Sans Cercle Blanc)
-const CACHE_NAME = 'immo-gestion-v3';
+// Service Worker IMMO GESTION - Version 4 (Force Purge Ancien Logo & WebAPK V4)
+const CACHE_NAME = 'immo-gestion-v4';
 const STATIC_ASSETS = [
   '/',
   '/login',
@@ -38,7 +38,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  // Purge immédiate de tous les anciens caches
+  // Purge immédiate et radicale de tout ancien cache (v1, v2, v3)
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
